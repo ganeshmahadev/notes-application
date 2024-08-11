@@ -17,18 +17,15 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Basic route
-app.get('/', (req, res) => {
-    res.send('Backend server is running');
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
+// Define your routes here
 const userRoutes = require('./routes/user');
 const noteRoutes = require('./routes/note');
 
 app.use(userRoutes);
 app.use(noteRoutes);
+
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
